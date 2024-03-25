@@ -55,9 +55,57 @@ class Cart(models.Model):
 class Order(models.Model):
     STATUSES = (
         ('In Progress', 'In Progress'),
-
+        ('Packed', 'Packed'),
+        ('On the way', 'On the way'),
+        ('Delivered', 'Delivered'),
+        ('Received', 'Received'),
+        ('Refused', 'Refused')
     )
+
+    DELIVERY_METHODS = (
+        ('Courier', 'Courier'),
+        ('Post', 'Post'),
+        ('Self-delivery', 'Self-delivery')
+    )
+
+    PAYMENT_METHODS = (
+        ('Card Online', 'Card Online'),
+        ('Card Offline', 'Card Offline'),
+        ('Cash', 'Cash')
+    )
+
+    PAYMENT_STATUS = (
+        ('Paid', 'Paid'),
+        ('In Progress', 'In Progress'),
+        ('Cancelled', 'Cancelled'),
+    )
+
+    NOTIF_TIMES = (
+        (24, 24),
+        (6, 6),
+        (1, 1),
+    )
+
     user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     total_sum = models.DecimalField(max_digits=10, decimal_places=2)
-    status = models.CharField(max_length=100)
+    status = models.CharField(max_length=100, choices=STATUSES, default='In Progress')
+
+    delivery_address = models.CharField(max_length=255, null=True, blank=True)
+    delivery_method = models.CharField(choices=DELIVERY_METHODS, max_length=100)
+
+    payment_method = models.CharField(choices=PAYMENT_METHODS, max_length=100)
+    payment_status = models.CharField(choices=PAYMENT_STATUS, max_length=100, default='In Progress')
+
+    delivery_notification_before = models.PositiveIntegerField(choices=NOTIF_TIMES, default=6)
+
+
+class OrderProducts(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    count = models.PositiveIntegerField()
+
+
+class CashBack(models.Model):
+    percent = models.PositiveIntegerField()
+    treshold = models.PositiveIntegerField()
