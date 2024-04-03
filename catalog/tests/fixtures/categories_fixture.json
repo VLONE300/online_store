@@ -1,0 +1,34 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Phones",
+      "description": "Phones"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "PC",
+      "description": "PC"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+      "name": "Headphones",
+      "description": "Headphones"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+      "name": "Keyboards",
+      "description": "Keyboards"
+    }
+  }
+]
