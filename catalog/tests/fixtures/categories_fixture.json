@@ -1,7 +1,7 @@
 [
   {
     "model": "catalog.category",
-    "pk": 2,
+    "pk": 1,
     "fields": {
       "name": "Phones",
       "description": "Phones"
@@ -9,26 +9,26 @@
   },
   {
     "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Notebooks",
+      "description": "Notebooks"
+    }
+  },
+  {
+    "model": "catalog.category",
     "pk": 3,
     "fields": {
-      "name": "PC",
-      "description": "PC"
+      "name": "TV",
+      "description": "TV"
     }
   },
   {
     "model": "catalog.category",
     "pk": 4,
     "fields": {
-      "name": "Headphones",
-      "description": "Headphones"
-    }
-  },
-  {
-    "model": "catalog.category",
-    "pk": 5,
-    "fields": {
-      "name": "Keyboards",
-      "description": "Keyboards"
+      "name": "Videocards",
+      "description": "Videocards"
     }
   }
 ]

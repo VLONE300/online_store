@@ -1,0 +1,29 @@
+[
+  {
+    "model": "catalog.seller",
+    "pk": 1,
+    "fields": {
+      "name": "Agroup",
+      "description": "-",
+      "contact": "-"
+    }
+  },
+  {
+    "model": "catalog.seller",
+    "pk": 2,
+    "fields": {
+      "name": "TTN",
+      "description": "-",
+      "contact": "-"
+    }
+  },
+  {
+    "model": "catalog.seller",
+    "pk": 3,
+    "fields": {
+      "name": "Техномир",
+      "description": "-",
+      "contact": "-"
+    }
+  }
+]
