@@ -1,0 +1,58 @@
+[
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name": "Iphone 15 Pro",
+        "article": "123456789",
+        "description": "Apple iOS, экран 6.1\" OLED (1179x2556) 120 Гц, Apple A17 Pro, ОЗУ 8 ГБ, память 128 ГБ, камера 48 Мп, аккумулятор 3274 мАч, 1 SIM (nano-SIM/eSIM), влагозащита IP68",
+        "count_on_stock": 100,
+        "price": "1000.00",
+        "discount": null,
+        "category": 1,
+        "seller": 1
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "Apple Macbook Pro 14.2",
+        "article": "987654321",
+        "description": "14.2\" 3024 x 1964, IPS, 120 Гц, Apple M3 Pro (11 ядер), 18 ГБ, SSD 512 ГБ, видеокарта встроенная, Mac OS, цвет крышки черный, аккумулятор 70 Вт·ч",
+        "count_on_stock": 50,
+        "price": "2200.00",
+        "discount": 1,
+        "category": 2,
+        "seller": 1
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "Телевизор Xiaomi TV Q2 55",
+        "article": "123654897",
+        "description": "55\" 3840x2160 (4K UHD), частота матрицы 60 Гц, Smart TV (Android TV), HDR10, HDR10+, Dolby Vision, HLG, DTS:HD, Dolby Atmos, Wi-Fi, смарт пульт",
+        "count_on_stock": 18,
+        "price": "700.00",
+        "discount": null,
+        "category": 3,
+        "seller": 3
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "name": "Palit GeForce RTX 4070 Super Dual OC 12GB",
+        "article": "456123789",
+        "description": "12 ГБ GDDR6X, 1980 МГц / 2550 МГц, 7168sp, 56 RT-ядер, трассировка лучей, 192 бит, 2 слота, питание 16 pin (PCIe Gen5), HDMI, DisplayPort",
+        "count_on_stock": 50,
+        "price": "750.00",
+        "discount": 1,
+        "category": 4,
+        "seller": 2
+    }
+}
+]
