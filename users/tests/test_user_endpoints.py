@@ -12,7 +12,7 @@ class LoginTestCase(APITestCase):
         self.client = APIClient()
 
         password = make_password('12345qwerty')
-        self.user = get_user_model().objects.create_user(
+        self.user = get_user_model().objects.create(
             email='test@gmail.com',
             password=password,
             is_active=True
@@ -23,8 +23,6 @@ class LoginTestCase(APITestCase):
             'password': '12345qwerty'
         }
         url = reverse('jwt-create')
-        response = self.client.post(url, data=data, format='json').data['access']
-        print(response.data)
         self.token = 'Bearer ' + self.client.post(url, data=data, format='json').data['access']
 
     def test_login(self):
