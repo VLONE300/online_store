@@ -20,3 +20,7 @@ jobs:
       - name: Set up .env
         run: |
           echo "${{secrets.ENV_FILE}}" > .env
+
+      - name: Run DB
+        run: |
+          docker-compose up -d db docker-compose.yml up -d db
