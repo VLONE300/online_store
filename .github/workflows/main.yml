@@ -23,4 +23,4 @@ jobs:
 
       - name: Run DB
         run: |
-          docker-compose up -d db docker-compose.yml up -d db
+          docker-compose -f docker-compose.yml up -d db
