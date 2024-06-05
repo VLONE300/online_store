@@ -2,9 +2,9 @@ name: Test Django CI
 
 on:
   push:
-    branches: [CI-test]
+    branches: [ CI-test ]
   pull_request:
-    branches: [CI-test, develop ]
+    branches: [ CI-test, develop ]
 
 jobs:
   build:
@@ -24,3 +24,13 @@ jobs:
       - name: Run DB
         run: |
           docker-compose -f docker-compose.yml up -d db
+      - name: Wait for DB
+        run: |
+          until docker exec -t $(docker ps -q -f name=shop_db_1) pg_isready -h localhost -p 5432; do
+            echo "Waiting for database to be ready...";
+            sleep 5;
+          done
+      - name: Install Dependencies
+          run:|
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
