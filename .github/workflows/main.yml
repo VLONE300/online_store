@@ -19,4 +19,4 @@ jobs:
           python-version: '3.10'
       - name: Set up .env
         run: |
-          echo "${{secrets.ENV_FILE}}" > online_store/.env
+          echo "${{secrets.ENV_FILE}}" > .env
