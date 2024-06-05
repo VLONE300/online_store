@@ -14,6 +14,7 @@ services:
       - "8000:8000"
     depends_on:
       - db
+
   db:
     image: postgres:12.0-alpine
     volumes:
@@ -31,7 +32,7 @@ services:
     build:
       context: .
     command: >
-      sh -c "sleep 10 && celery -A shop worker -l info"
+      sh -c "sleep 10 && celery -A online_shop worker -l info"
     volumes:
       - .:/app
     depends_on:
