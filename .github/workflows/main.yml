@@ -17,16 +17,18 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
+
       - name: Set up .env
         run: |
           echo "${{secrets.ENV_FILE}}" > .env
 
-      - name: Run DB
+      - name: Run DB and Redis
         run: |
-          docker-compose -f docker-compose.yml up -d db
+          docker-compose -f docker-compose.yml up -d db redis
+
       - name: Wait for DB
         run: |
-          until docker exec -t $(docker ps -q -f name=shop_db_1) pg_isready -h localhost -p 5432; do
+          until docker exec -t $(docker ps -q -f name=online_store-db-1) pg_isready -h localhost -p 5432; do
             echo "Waiting for database to be ready...";
             sleep 5;
           done
@@ -35,11 +37,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
       - name: Lint with Prospector
         run: |
           prospector || true
 
+      - name: Run Migrations
+        run: |
+          python manage.py migrate
+
       - name: Run Tests
         run: |
-          cd online_store
           pytest

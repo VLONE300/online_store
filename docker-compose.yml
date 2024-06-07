@@ -1,51 +1,43 @@
-name: Test Django CI
+version: "3"
 
-on:
-  push:
-    branches: [ CI-test ]
-  pull_request:
-    branches: [ CI-test, develop ]
+services:
+  app:
+    command: >
+      sh -c "
+          sleep 10 &&
+          python3 manage.py migrate &&
+          python3 manage.py runserver 0.0.0.0:8000"
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Set up .env
-        run: |
-          echo "${{secrets.ENV_FILE}}" > .env
-
-      - name: Run DB and Redis
-        run: |
-          docker-compose -f docker-compose.yml up -d db redis
-          
-      - name: Wait for DB
-        run: |
-          until docker exec -t $(docker ps -q -f name=online_store-db-1) pg_isready -h localhost -p 5432; do
-            echo "Waiting for database to be ready...";
-            sleep 5;
-          done
-
-      - name: Install Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Lint with Prospector
-        run: |
-          prospector || true
-
-      - name: Run Migrations
-        run: |
-          python manage.py migrate
-
-      - name: Run Tests
-        run: |
-          pytest
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - POSTGRES_DB=$POSTGRES_DATABASE_NAME
+    ports:
+      - "5434:5432"
+  redis:
+    image: redis:alpine
+  celery:
+    restart: always
+    build:
+      context: .
+    command: >
+      sh -c "sleep 10 && celery -A online_shop worker -l info"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - app
+      - redis
+volumes:
+  postgres_data:
